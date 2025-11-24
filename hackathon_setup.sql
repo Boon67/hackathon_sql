@@ -6,20 +6,24 @@
 
 -- Initial setup
 USE ROLE ACCOUNTADMIN;
-CREATE OR REPLACE DATABASE HACK_ADMIN;
+CREATE DATABASE IF NOT EXISTS HACK_ADMIN;
 USE DATABASE HACK_ADMIN;
 USE WAREHOUSE COMPUTE_WH;
 
 -- ============================================
 -- CONFIGURATION: Add usernames here
 -- ============================================
-CREATE OR REPLACE TABLE user_list (username VARCHAR);
-INSERT INTO user_list VALUES ('tboon'); -- Add more users as needed
+CREATE TABLE IF NOT EXISTS user_list (username VARCHAR);
+DELETE FROM user_list;
+INSERT INTO user_list VALUES 
+    ('user1'),
+    ('user2')
+    ; -- Add more users as needed
 
 -- ============================================
 -- BACKUP USER DEFAULTS
 -- ============================================
-CREATE OR REPLACE TABLE user_defaults_backup AS
+CREATE TABLE IF NOT EXISTS user_defaults_backup AS
 SELECT 
     name as username,
     default_role,
