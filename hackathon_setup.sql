@@ -16,8 +16,7 @@ USE WAREHOUSE COMPUTE_WH;
 CREATE TABLE IF NOT EXISTS user_list (username VARCHAR);
 DELETE FROM user_list;
 INSERT INTO user_list VALUES 
-    ('user1'),
-    ('user2')
+    ('tboon')
     ; -- Add more users as needed
 
 -- ============================================
@@ -181,7 +180,7 @@ SELECT
     u.default_role,
     u.default_warehouse,
     u.default_namespace
-FROM user_list ul
+FROM HACK_ADMIN.PUBLIC.user_list ul
 LEFT JOIN (SELECT DISTINCT username, db_name, wh_name FROM HACK_ADMIN.PUBLIC.setup_commands) ur ON UPPER(ul.username) = ur.username
 LEFT JOIN SNOWFLAKE.ACCOUNT_USAGE.USERS u ON UPPER(ul.username) = u.name
 ORDER BY ul.username;
